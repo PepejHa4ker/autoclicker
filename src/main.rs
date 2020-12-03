@@ -1,4 +1,4 @@
-use winapi::um::winuser::{GetAsyncKeyState, VK_MBUTTON, mouse_event, MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP, VK_F8};
+use winapi::um::winuser::{GetAsyncKeyState, VK_MBUTTON, mouse_event, MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP, VK_F8, VK_LBUTTON};
 use std::thread::sleep;
 use winapi::_core::time::Duration;
 
@@ -24,9 +24,11 @@ fn main() {
                 break;
             }
             if clicker.enabled {
-                mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                sleep(Duration::from_millis(1000 / 50));
-                mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                if GetAsyncKeyState(VK_LBUTTON) == 1 {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    sleep(Duration::from_millis(1000 / 50));
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                }
             }
         }
     }
