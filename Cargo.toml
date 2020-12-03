@@ -1,0 +1,18 @@
+[package]
+name = "autoclicker"
+version = "0.1.0"
+build = "build.rs"
+authors = ["pepej <gamzan127@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+winapi = { git = "https://github.com/PepejHa4ker/winapi-rs", branch = "0.3", features = ["winuser"]}
+[target.'cfg(windows)'.build-dependencies]
+winres = "*"
+
+[profile.release]
+opt-level = 3
+lto = true
+debug = false
+codegen-units = 1
+panic = "abort"
